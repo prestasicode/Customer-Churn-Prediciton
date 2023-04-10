@@ -8,4 +8,4 @@ Now, this dataset consists of 10,000 customers mentioning their age, salary, mar
 
 We have only 16.07% of customers who have churned. Thus, it's a bit difficult to train our model to predict churning customers.
 
-## Credit : (https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers?resource=download)
+## Credit : https://www.kaggle.com/datasets/sakshigoyal7/credit-card-customers?resource=download
