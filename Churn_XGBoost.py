@@ -44,7 +44,28 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import roc_auc_score
 
-
+skf = StratifiedKFold(n_splits = 10, shuffle = True, random_state = 42)
+kfold = 10
+xgb_preds = []
+mean_score = []
+for i, (train_idx, test_idx) in enumerate(skf.split(X, y)):
+    print("Fold %d / %d" %(i+1, kfold))
+    X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
+    y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
+    watchlist = [(X_train, y_train), (X_test, y_test)]
+    
+    model = XGBClassifier(n_estimators = 1000, max_depth = 4, n_jobs = 2)
+    model.fit(X_train, y_train, eval_set = watchlist, verbose = False)
+    
+    pred_prob = model.predict_proba(X_test)[:,1]
+    test_score = roc_auc_score(y_test, pred_prob)
+    print("Roc Auc Score for fold %d = %f" %(i+1, test_score))
+    mean_score.append(test_score)
+    best_iter = model.best_iteration
+    
+    preds = model.predict_proba(test)[:, 1]
+    xgb_preds.append(preds)
+    
     
 train_X.copy()
 test_X.copy()
