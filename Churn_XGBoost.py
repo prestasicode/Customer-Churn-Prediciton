@@ -45,5 +45,3 @@ ss_features = ["avg_arpu_3m", "acct_age", "billing_cycle", "credit_class"]
 scaler = StandardScaler().fit(train_X[ss_features])
 ss_train[ss_features] = scaler.transform(train_X[ss_features])
 ss_test[ss_features] = scaler.transform(test_X[ss_features])
-
-
