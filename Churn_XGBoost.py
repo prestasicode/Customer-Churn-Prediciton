@@ -47,4 +47,3 @@ ss_train[ss_features] = scaler.transform(train_X[ss_features])
 ss_test[ss_features] = scaler.transform(test_X[ss_features])
 
 
-https://www.kaggle.com/code/seunghason/churn-modeling?scriptVersionId=123035414&cellId=32
