@@ -43,8 +43,6 @@ def scoreModel(avg_arpu_3m, acct_age, billing_cycle, credit_class, sales_channel
         return -1, -1, str(-1), str(e)
     
 
-
-
 skf = StratifiedKFold(n_splits = 10, shuffle = True, random_state = 42)
 kfold = 10
 xgb_preds = []
@@ -74,3 +72,13 @@ ss_features = ["avg_arpu_3m", "acct_age", "billing_cycle", "credit_class"]
 scaler = StandardScaler().fit(train_X[ss_features])
 ss_train[ss_features] = scaler.transform(train_X[ss_features])
 ss_test[ss_features] = scaler.transform(test_X[ss_features])
+
+classifier=xgboost.XGBClassifier(base_score=0.5, booster='gbtree', callbacks=None,
+              colsample_bylevel=1, colsample_bynode=1, colsample_bytree=0.7,
+              early_stopping_rounds=None, enable_categorical=False,
+              eval_metric=None, gamma=0.2, gpu_id=-1, grow_policy='depthwise',
+              importance_type=None, interaction_constraints='',
+              learning_rate=0.2, max_bin=256, max_cat_to_onehot=4,
+              max_delta_step=0, max_depth=5, max_leaves=0, min_child_weight=5,monotone_constraints='()', n_estimators=100,
+              n_jobs=0, num_parallel_tree=1, predictor='auto', random_state=0,
+              reg_alpha=0, reg_lambda=1)
