@@ -1,4 +1,3 @@
-
 import pandas
 import joblib, pickle
 from sklearn.preprocessing import OneHotEncoder
@@ -39,3 +38,13 @@ def scoreModel(avg_arpu_3m, acct_age, billing_cycle, credit_class, sales_channel
         return P_churn1, P_churn0, str(P_churn), msg
     except Exception as e:
         return -1, -1, str(-1), str(e)
+    
+train_X.copy()
+test_X.copy()
+ss_features = ["avg_arpu_3m", "acct_age", "billing_cycle", "credit_class"]
+scaler = StandardScaler().fit(train_X[ss_features])
+ss_train[ss_features] = scaler.transform(train_X[ss_features])
+ss_test[ss_features] = scaler.transform(test_X[ss_features])
+
+
+https://www.kaggle.com/code/seunghason/churn-modeling?scriptVersionId=123035414&cellId=32
