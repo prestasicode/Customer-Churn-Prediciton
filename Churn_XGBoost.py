@@ -2,6 +2,9 @@ import pandas
 import joblib, pickle
 from sklearn.preprocessing import OneHotEncoder
 import settings
+from xgboost import XGBClassifier
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import roc_auc_score
 
 def preprocessing(df, ohe_loc = None):
     encode_cols = df.loc[:, df.dtypes == "object"].columns.tolist()
@@ -40,9 +43,7 @@ def scoreModel(avg_arpu_3m, acct_age, billing_cycle, credit_class, sales_channel
         return -1, -1, str(-1), str(e)
     
 
-from xgboost import XGBClassifier
-from sklearn.model_selection import StratifiedKFold
-from sklearn.metrics import roc_auc_score
+
 
 skf = StratifiedKFold(n_splits = 10, shuffle = True, random_state = 42)
 kfold = 10
