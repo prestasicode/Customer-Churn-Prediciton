@@ -39,6 +39,13 @@ def scoreModel(avg_arpu_3m, acct_age, billing_cycle, credit_class, sales_channel
     except Exception as e:
         return -1, -1, str(-1), str(e)
     
+
+from xgboost import XGBClassifier
+from sklearn.model_selection import StratifiedKFold
+from sklearn.metrics import roc_auc_score
+
+
+    
 train_X.copy()
 test_X.copy()
 ss_features = ["avg_arpu_3m", "acct_age", "billing_cycle", "credit_class"]
